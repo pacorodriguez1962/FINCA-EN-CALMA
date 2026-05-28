@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finca en Calma — Dossier de Inversión Glamping</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C8963E;--gold-light:#E8B86D;--forest:#1B3022;
+  --ink:#0D1B12;--cream:#FDF6E3;--bg:#060e05;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Jost',sans-serif;font-weight:300;color:#e8e0d0;overflow-x:hidden;}
+
+/* SLIDES */
+.slide{width:100%;min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+.slide-full{width:100%;height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+
+/* OVERLAYS */
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.ov-dark{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,14,5,0.90) 0%,rgba(6,14,5,0.55) 60%,rgba(6,14,5,0.78) 100%);}
+.ov-left{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,14,5,0.96) 0%,rgba(6,14,5,0.6) 55%,rgba(6,14,5,0.05) 100%);}
+.ov-bottom{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,5,0) 40%,rgba(6,14,5,0.97) 100%);}
+.ov-center{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,5,0.55) 0%,rgba(6,14,5,0.85) 100%);}
+
+/* LAYOUT */
+.z{position:relative;z-index:2;}
+.px{padding-left:clamp(28px,8vw,120px);padding-right:clamp(28px,8vw,120px);}
+.py{padding-top:clamp(60px,8vh,100px);padding-bottom:clamp(60px,8vh,100px);}
+.center{text-align:center;}
+
+/* TYPOGRAPHY */
+.label{font-size:11px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block;}
+.headline{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.05;color:#fff;}
+.body-text{font-size:15px;color:#a89f90;line-height:1.75;font-weight:300;}
+.divider{width:56px;height:1px;background:var(--gold);margin:18px 0;}
+.divider-c{margin:18px auto;}
+
+/* FOOTER STRIP */
+.strip{position:absolute;bottom:0;left:0;right:0;padding:16px clamp(28px,8vw,120px);display:flex;justify-content:space-between;border-top:1px solid rgba(200,150,62,0.1);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,150,62,0.3);z-index:5;}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.45;animation:float 2.5s ease-in-out infinite;}
+.scroll-hint span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c8bfaa;}
+.scroll-line{width:1px;height:38px;background:linear-gradient(180deg,rgba(200,150,62,0.6),transparent);}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* HERITAGE BAND */
+.band{background:var(--gold);padding:13px clamp(28px,8vw,120px);display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;}
+.band-item{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--forest);}
+.band-dot{width:4px;height:4px;background:var(--forest);border-radius:50%;opacity:0.35;}
+
+/* HISTORIA LAYOUT */
+.historia{display:grid;grid-template-columns:0.9fr 1.1fr;}
+.historia-img{position:relative;overflow:hidden;min-height:100vh;}
+.historia-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.historia-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 55%,var(--bg) 100%);}
+.historia-txt{padding:clamp(50px,8vh,100px) clamp(36px,5vw,70px);display:flex;flex-direction:column;justify-content:center;}
+
+/* BADGE */
+.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:4px;text-transform:uppercase;padding:6px 16px;margin-bottom:28px;width:fit-content;}
+
+/* CARDS */
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(200,150,62,0.15);padding:30px 26px;position:relative;}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:36px;background:var(--gold);}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#e8e0d0;margin-bottom:8px;}
+
+/* GRID HELPERS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+
+/* EXPERIENCE CARDS */
+.exp{border:1px solid rgba(200,150,62,0.12);padding:36px 28px;transition:border-color .3s;}
+.exp:hover{border-color:rgba(200,150,62,0.4);}
+.exp-icon{font-size:26px;margin-bottom:18px;}
+.exp-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#e8e0d0;margin-bottom:10px;}
+
+/* METRICS */
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(200,150,62,0.1);}
+.metric{background:var(--bg);padding:38px 26px;text-align:center;}
+.metric-num{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;color:var(--gold);line-height:1;}
+.metric-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5a5248;margin-top:8px;}
+.metric-sub{font-size:12px;color:#4a4440;margin-top:4px;}
+
+/* ROI */
+.roi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,150,62,0.07);}
+.roi{background:var(--bg);padding:36px 28px;}
+.roi-marca{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.roi-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#e8e0d0;line-height:1;}
+.roi-lbl{font-size:12px;color:#4a4440;margin-top:4px;margin-bottom:18px;}
+.roi-bar-bg{height:3px;background:rgba(255,255,255,0.06);margin-bottom:6px;}
+.roi-bar{height:3px;background:var(--gold);}
+.roi-pct{font-size:12px;color:var(--gold-light);}
+
+/* BUDGET TABLE */
+.btable{width:100%;border-collapse:collapse;}
+.btable th{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;border-bottom:1px solid rgba(200,150,62,0.25);padding:11px 14px;text-align:left;}
+.btable td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;color:#a89f90;}
+.btable tr:hover td{background:rgba(200,150,62,0.03);}
+.btable .sec td{color:var(--gold-light);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding-top:22px;}
+.btable .tot td{color:#e8e0d0;font-weight:500;border-top:1px solid rgba(200,150,62,0.3);border-bottom:none;}
+
+/* TIMELINE */
+.tl-item{display:grid;grid-template-columns:70px 1px 1fr;gap:0 28px;padding-bottom:36px;}
+.tl-num{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:rgba(200,150,62,0.18);text-align:right;line-height:1;}
+.tl-line{background:linear-gradient(180deg,var(--gold) 0%,rgba(200,150,62,0.08) 100%);}
+.tl-c{padding-top:6px;}
+.tl-phase{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#e8e0d0;margin-bottom:7px;}
+.tl-desc{font-size:13px;color:#6a6258;line-height:1.6;}
+.tl-time{font-size:11px;color:rgba(200,150,62,0.55);margin-top:7px;}
+
+/* GALERÍA MOSAICO */
+.gal-caption{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(6,14,5,0.88));}
+.gal-season{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.gal-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:#fff;}
+
+/* CONTACT */
+.cbox{border:1px solid rgba(200,150,62,0.22);padding:48px 56px;max-width:680px;margin:0 auto;text-align:center;position:relative;}
+.cbox::before,.cbox::after{content:'';position:absolute;width:18px;height:18px;border-color:var(--gold);border-style:solid;}
+.cbox::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.cbox::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px;text-align:left;}
+.clabel{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.cval{font-size:15px;color:#c8bfaa;margin-top:3px;}
+
+/* TARIFA ROWS */
+.trow{padding:18px 24px;display:flex;justify-content:space-between;align-items:center;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .historia{grid-template-columns:1fr;}
+  .historia-img{min-height:50vh;}
+  .historia-img::after{background:linear-gradient(180deg,transparent 60%,var(--bg) 100%);}
+  .g2{grid-template-columns:1fr;}
+  .metric-row{grid-template-columns:1fr 1fr;}
+  .roi-row{grid-template-columns:1fr;}
+  .g3{grid-template-columns:1fr;}
+  .cgrid{grid-template-columns:1fr;}
+  .band{gap:16px;}
+}
+@media(max-width:580px){
+  .metric-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ SLIDE 1: PORTADA ══════ -->
+<section class="slide-full">
+  <div class="bg" style="background-image:url('21.jpg');"></div>
+  <div class="ov-dark"></div>
+  <div class="ov-bottom"></div>
+
+  <div class="z px py" style="max-width:880px;">
+    <div style="display:inline-block;border:1px solid rgba(200,150,62,0.35);padding:6px 18px;margin-bottom:28px;font-size:10px;letter-spacing:3px;color:var(--gold-light);text-transform:uppercase;">
+      Dossier de Inversión · Proyecto Glamping · 2025
+    </div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(68px,10vw,128px);font-weight:300;line-height:0.95;color:#fff;letter-spacing:-2px;">
+      FINCA<br><strong style="font-weight:700;color:var(--gold);">en</strong> <em style="font-style:italic;font-weight:300;">Calma</em>
+    </h1>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.4vw,26px);font-style:italic;color:#c8bfaa;margin-top:18px;font-weight:300;">Donde el silencio se disfruta</p>
+    <div class="divider"></div>
+    <p class="body-text" style="max-width:500px;font-size:14px;">
+      Proyecto de turismo glamping de alta gama en Torrebuceit, Cuenca — Castilla-La Mancha.<br>
+      Alojamiento sostenible · Bienestar · Naturaleza
+    </p>
+  </div>
+
+  <div class="strip"><span>Finca en Calma</span><span>Torrebuceit · Cuenca · España</span></div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Descubrir</span></div>
+</section>
+
+<!-- ══════ BANDA PATRIMONIO ══════ -->
+<div class="band">
+  <div class="band-item">Acueducto Romano · s. I d.C.</div>
+  <div class="band-dot"></div>
+  <div class="band-item">Fortaleza Árabe · s. XII — Rey Ceyt-Abu-Ceyt</div>
+  <div class="band-dot"></div>
+  <div class="band-item">Patrimonio Familiar · Finca Torrebuceit</div>
+</div>
+
+<!-- ══════ SLIDE 2: HISTORIA ══════ -->
+<section class="slide">
+  <div class="historia">
+    <div class="historia-img">
+      <img src="acueducto_romano.jpg" alt="Acueducto romano de Torrebuceit">
+    </div>
+    <div class="historia-txt">
+      <div class="badge">Patrimonio Exclusivo</div>
+      <h2 class="headline" style="font-size:clamp(36px,4.5vw,60px);margin-bottom:18px;">
+        Un escenario<br><em style="font-style:italic;font-weight:300;">con historia</em>
+      </h2>
+      <div class="divider"></div>
+      <p class="body-text" style="margin-bottom:26px;">
+        La finca Torrebuceit es mucho más que un terreno excepcional. Sobre sus tierras conviven dos monumentos de valor incalculable: un <strong style="color:#e8e0d0;font-weight:400;">acueducto romano del siglo I d.C.</strong> y la <strong style="color:#e8e0d0;font-weight:400;">fortaleza árabe del siglo XII</strong>, antigua sede del rey moro Ceyt-Abu-Ceyt, quien se convertiría al cristianismo bajo el reinado de Jaime I de Aragón.
+      </p>
+      <p class="body-text" style="margin-bottom:38px;">
+        Este patrimonio histórico, de propiedad familiar, convierte a Finca en Calma en un destino único e irreplicable en el panorama del turismo de lujo rural español.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div class="card">
+          <div class="card-title">Acueducto Romano</div>
+          <p class="body-text" style="font-size:13px;">Estructura del siglo I d.C. perfectamente conservada. Elemento visual icónico y fotogénico.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Fortaleza Árabe</div>
+          <p class="body-text" style="font-size:13px;">Torre del siglo XII del rey Ceyt-Abu-Ceyt. Historia viva de la Reconquista española.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 3: CASTILLO ══════ -->
+<section class="slide-full">
+  <div class="bg" style="background-image:url('castillo.png');background-position:center 30%;"></div>
+  <div class="ov-left"></div>
+
+  <div class="z px py" style="max-width:580px;">
+    <span class="label">La Fortaleza · Siglo XII</span>
+    <h2 class="headline" style="font-size:clamp(38px,5.5vw,70px);margin-bottom:18px;">
+      El Rey que<br><em style="font-style:italic;font-weight:300;">eligió la paz</em>
+    </h2>
+    <div class="divider"></div>
+    <p class="body-text" style="margin-bottom:22px;">
+      Ceyt-Abu-Ceyt, gobernador almohade de Valencia, eligió estas tierras de Cuenca como refugio tras su conversión al cristianismo. La fortaleza que lleva su nombre es testigo de uno de los episodios más singulares de la Reconquista.
+    </p>
+    <p class="body-text">
+      Hoy, esa misma piedra centenaria enmarca el entorno de los alojamientos — un contraste entre historia y confort moderno que ningún hotel convencional puede ofrecer.
+    </p>
+  </div>
+  <div class="strip"><span>Finca en Calma</span><span>Patrimonio Histórico</span></div>
+</section>
+
+<!-- ══════ SLIDE 4: TIPITOP FICHA ══════ -->
+<section class="slide" style="background:#040c04;">
+  <div class="z px py center">
+    <span class="label">El Alojamiento</span>
+    <h2 class="headline" style="font-size:clamp(34px,4.5vw,56px);margin-bottom:14px;">
+      TipiTop — <em style="font-style:italic;font-weight:300;">diseño que enamora</em>
+    </h2>
+    <div class="divider divider-c"></div>
+    <p class="body-text" style="max-width:600px;margin:0 auto 44px;">
+      Estructura de pino laminado, lona técnica, cocina totalmente equipada, baño privado con ducha y dormitorio en altillo. Una experiencia de hotel boutique en plena naturaleza.
+    </p>
+
+    <!-- Foto grande exterior -->
+    <div style="width:100%;height:clamp(280px,42vw,500px);overflow:hidden;margin-bottom:3px;">
+      <img src="tipi_exterior.jpg" alt="Exterior TipiTop con terraza iluminada" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;">
+    </div>
+
+    <!-- Fila 5 interiores -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;">
+      <div style="overflow:hidden;height:190px;"><img src="tipi_exterior.jpg" alt="Salón cocina y zona de estar" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div style="overflow:hidden;height:190px;"><img src="9.jpg" alt="Cocina equipada y altillo" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div style="overflow:hidden;height:190px;"><img src="14.jpg" alt="Dormitorio altillo" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div style="overflow:hidden;height:190px;"><img src="WC.jpg" alt="Baño privado con ducha" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div style="overflow:hidden;height:190px;background:#f0ebe2;"><img src="10.jpg" alt="Estructura modular TipiTop" style="width:100%;height:100%;object-fit:cover;"></div>
+    </div>
+
+    <!-- Leyendas -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:44px;">
+      <div style="padding:9px 12px;background:rgba(200,150,62,0.05);font-size:10px;letter-spacing:1px;color:#6a6258;">Salón · Zona de estar</div>
+      <div style="padding:9px 12px;background:rgba(200,150,62,0.05);font-size:10px;letter-spacing:1px;color:#6a6258;">Cocina equipada</div>
+      <div style="padding:9px 12px;background:rgba(200,150,62,0.05);font-size:10px;letter-spacing:1px;color:#6a6258;">Dormitorio altillo</div>
+      <div style="padding:9px 12px;background:rgba(200,150,62,0.05);font-size:10px;letter-spacing:1px;color:#6a6258;">Baño privado</div>
+      <div style="padding:9px 12px;background:rgba(200,150,62,0.05);font-size:10px;letter-spacing:1px;color:#6a6258;">Estructura modular</div>
+    </div>
+
+    <!-- Specs -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(200,150,62,0.07);max-width:1050px;margin:0 auto;">
+      <div style="background:var(--bg);padding:26px 18px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);line-height:1;">4×8<span style="font-size:15px;">m</span></div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Dimensiones</div>
+      </div>
+      <div style="background:var(--bg);padding:26px 18px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);line-height:1;">2<span style="font-size:15px;">dorm</span></div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Planta + altillo</div>
+      </div>
+      <div style="background:var(--bg);padding:26px 18px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);line-height:1;">10<span style="font-size:15px;">m²</span></div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Terraza privada</div>
+      </div>
+      <div style="background:var(--bg);padding:26px 18px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);line-height:1;">4<span style="font-size:15px;">pax</span></div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Capacidad máx.</div>
+      </div>
+      <div style="background:var(--bg);padding:26px 18px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);line-height:1;">A/C</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Climatización</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 5: PROPUESTA DE VALOR ══════ -->
+<section class="slide" style="background:var(--bg);">
+  <div class="z px py center">
+    <span class="label">Propuesta de Valor</span>
+    <h2 class="headline" style="font-size:clamp(34px,4.5vw,58px);margin-bottom:14px;">
+      Lo que hace <em style="font-style:italic;font-weight:300;">único</em> este proyecto
+    </h2>
+    <div class="divider divider-c"></div>
+    <p class="body-text" style="max-width:620px;margin:0 auto 50px;">
+      Un glamping premium no se construye solo con tiendas bonitas. Se construye sobre un lugar irrepetible, una historia auténtica y una experiencia que el cliente no encuentra en ningún otro sitio.
+    </p>
+    <div class="g3" style="max-width:1080px;margin:0 auto;">
+      <div class="exp"><div class="exp-icon">🏛️</div><div class="exp-title">Patrimonio Vivo</div><p class="body-text" style="font-size:13px;">Acueducto romano y fortaleza árabe dentro de la finca. El huésped desayuna con 2.000 años de historia a la vista.</p></div>
+      <div class="exp"><div class="exp-icon">🌌</div><div class="exp-title">Cielos Sin Contaminar</div><p class="body-text" style="font-size:13px;">Cero contaminación lumínica. La Vía Láctea visible a simple vista. Posibilidad de certificación Starlight.</p></div>
+      <div class="exp"><div class="exp-icon">🔇</div><div class="exp-title">Silencio Absoluto</div><p class="body-text" style="font-size:13px;">El bien más escaso del siglo XXI. A menos de 2 horas de Madrid y Valencia.</p></div>
+      <div class="exp"><div class="exp-icon">🌻</div><div class="exp-title">Paisaje Icónico</div><p class="body-text" style="font-size:13px;">Campos de girasoles, olivares centenarios, amapolas. Contenido fotográfico natural e irresistible para redes.</p></div>
+      <div class="exp"><div class="exp-icon">♻️</div><div class="exp-title">Sostenibilidad Real</div><p class="body-text" style="font-size:13px;">Pozo propio, energía solar, fosa biológica, kilómetro cero. No es marketing verde — es la arquitectura del proyecto.</p></div>
+      <div class="exp"><div class="exp-icon">📍</div><div class="exp-title">Acceso Privilegiado</div><p class="body-text" style="font-size:13px;">1h 45min de Madrid, 2h de Valencia. Zona con escasa competencia directa en el segmento premium.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 6: MÉTRICAS ══════ -->
+<section class="slide" style="background:#030a03;">
+  <div class="z px py center">
+    <span class="label">Viabilidad Financiera</span>
+    <h2 class="headline" style="font-size:clamp(34px,4.5vw,58px);margin-bottom:14px;">Los números <em style="font-style:italic;font-weight:300;">hablan</em></h2>
+    <div class="divider divider-c"></div>
+    <p class="body-text" style="max-width:580px;margin:0 auto 44px;">Basado en datos reales de glampings activos en Cuenca, Toledo y Guadalajara. Precio medio conservador: 130 €/noche.</p>
+
+    <div class="metric-row" style="max-width:1080px;margin:0 auto 44px;">
+      <div class="metric"><div class="metric-num">130<span style="font-size:26px;">€</span></div><div class="metric-lbl">Precio medio por noche</div><div class="metric-sub">Estimación conservadora</div></div>
+      <div class="metric"><div class="metric-num">40<span style="font-size:26px;">%</span></div><div class="metric-lbl">Ocupación anual realista</div><div class="metric-sub">146 noches/año por unidad</div></div>
+      <div class="metric"><div class="metric-num">19<span style="font-size:26px;">k€</span></div><div class="metric-lbl">Ingresos por tienda/año</div><div class="metric-sub">Con 40% de ocupación</div></div>
+      <div class="metric"><div class="metric-num">57<span style="font-size:26px;">k€</span></div><div class="metric-lbl">Ingresos anuales · 3 unidades</div><div class="metric-sub">Escenario base</div></div>
+    </div>
+
+    <div class="roi-row" style="max-width:1080px;margin:0 auto;">
+      <div class="roi">
+        <div class="roi-marca">Outstanding — Máxima Rentabilidad</div>
+        <div class="roi-num">12.000 €</div><div class="roi-lbl">Inversión por unidad</div>
+        <div class="roi-bar-bg"><div class="roi-bar" style="width:90%;"></div></div>
+        <div class="roi-pct">ROI 158–177% · Recuperación 7–9 meses</div>
+      </div>
+      <div class="roi">
+        <div class="roi-marca">YALA — Equilibrio Óptimo</div>
+        <div class="roi-num">16.000 €</div><div class="roi-lbl">Inversión por unidad</div>
+        <div class="roi-bar-bg"><div class="roi-bar" style="width:68%;"></div></div>
+        <div class="roi-pct">ROI 118–133% · Recuperación 10–12 meses</div>
+      </div>
+      <div class="roi" style="border:1px solid rgba(200,150,62,0.28);">
+        <div class="roi-marca" style="color:var(--gold-light);">TipiTop — Máximo Prestigio ★</div>
+        <div class="roi-num" style="color:var(--gold-light);">24.000 €</div><div class="roi-lbl">Inversión por unidad</div>
+        <div class="roi-bar-bg"><div class="roi-bar" style="width:48%;background:var(--gold-light);"></div></div>
+        <div class="roi-pct" style="color:var(--gold-light);">ROI 79–88% · Recuperación 14–16 meses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 7: PRESUPUESTO ══════ -->
+<section class="slide" style="background:var(--bg);">
+  <div class="z px py">
+    <div class="g2" style="gap:70px;">
+      <div>
+        <span class="label">Inversión Total</span>
+        <h2 class="headline" style="font-size:clamp(32px,4vw,50px);margin-bottom:18px;">Presupuesto<br><em style="font-style:italic;font-weight:300;">desglosado</em></h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:36px;">Proyecto para 3 unidades TipiTop con todas las infraestructuras necesarias. La fosa séptica es compartida — solo se instala una para las tres unidades.</p>
+        <div style="background:rgba(200,150,62,0.05);border:1px solid rgba(200,150,62,0.14);padding:28px;">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Total Estimado · 3 TipiTop</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#fff;line-height:1;">82–94<span style="font-size:24px;">k€</span></div>
+          <div style="font-size:12px;color:#4a4440;margin-top:6px;">Obra + Tiendas + Instalaciones + Licencias</div>
+          <div class="divider" style="margin-top:20px;margin-bottom:16px;"></div>
+          <div style="font-size:13px;color:#a89f90;">Retorno proyectado: <strong style="color:var(--gold-light);">14–18 meses</strong></div>
+        </div>
+      </div>
+      <div>
+        <table class="btable">
+          <thead><tr><th>Partida</th><th style="text-align:right;">3 unidades</th></tr></thead>
+          <tbody>
+            <tr class="sec"><td colspan="2">Obra Civil e Instalaciones</td></tr>
+            <tr><td>Fosa séptica 3.000 L + filtro + zanja</td><td style="text-align:right;">2.900–4.000 €</td></tr>
+            <tr><td>Soleras de hormigón H-25 (×3)</td><td style="text-align:right;">3.600–4.500 €</td></tr>
+            <tr><td>Toma de agua desde pozo (×3)</td><td style="text-align:right;">750–1.050 €</td></tr>
+            <tr><td>Desagüe a fosa PVC 110 mm (×3)</td><td style="text-align:right;">1.050–1.500 €</td></tr>
+            <tr><td>Instalación eléctrica completa</td><td style="text-align:right;">3.000–4.800 €</td></tr>
+            <tr><td>Cuadro general / ampliación potencia</td><td style="text-align:right;">800–1.500 €</td></tr>
+            <tr class="sec"><td colspan="2">Licencias (Castilla-La Mancha)</td></tr>
+            <tr><td>Licencia urbanística + tasas municipales</td><td style="text-align:right;">230–450 €</td></tr>
+            <tr><td>Proyecto técnico + certificado final</td><td style="text-align:right;">1.050–1.800 €</td></tr>
+            <tr><td>Seguro RC obligatorio (anual)</td><td style="text-align:right;">180–300 €</td></tr>
+            <tr class="sec"><td colspan="2">Alojamientos TipiTop</td></tr>
+            <tr><td>3 unidades TipiTop (premium equipadas)</td><td style="text-align:right;">69.000–75.000 €</td></tr>
+            <tr class="tot"><td><strong>TOTAL PROYECTO · 3 TIPITOP</strong></td><td style="text-align:right;color:var(--gold-light);"><strong>82.000–94.000 €</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 8: TARIFAS ══════ -->
+<section class="slide" style="background:#030a03;">
+  <div class="z px py">
+    <div class="g2" style="gap:70px;">
+      <div>
+        <span class="label">Tarifas por Temporada</span>
+        <h2 class="headline" style="font-size:clamp(32px,4vw,50px);margin-bottom:18px;">La experiencia<br><em style="font-style:italic;font-weight:300;">completa</em></h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:28px;">El precio por noche incluye todo. Los servicios extra son fuentes adicionales de ingresos que elevan el ticket medio.</p>
+
+        <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:32px;">
+          <div class="trow" style="background:rgba(200,150,62,0.04);border-left:3px solid rgba(200,150,62,0.18);">
+            <span style="font-size:14px;color:#a89f90;">Temporada baja</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#e8e0d0;">80–110 €</span>
+          </div>
+          <div class="trow" style="background:rgba(200,150,62,0.07);border-left:3px solid rgba(200,150,62,0.35);">
+            <span style="font-size:14px;color:#a89f90;">Temporada media</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#e8e0d0;">110–140 €</span>
+          </div>
+          <div class="trow" style="background:rgba(200,150,62,0.11);border-left:3px solid rgba(200,150,62,0.6);">
+            <span style="font-size:14px;color:#a89f90;">Temporada alta</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#e8e0d0;">140–180 €</span>
+          </div>
+          <div class="trow" style="background:rgba(200,150,62,0.16);border-left:3px solid var(--gold);">
+            <span style="font-size:14px;color:#c8bfaa;">Fines de semana especiales</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold-light);">160–220 €</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(200,150,62,0.05);border:1px solid rgba(200,150,62,0.14);padding:26px;">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Proyección anual · 3 unidades · 45%</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:var(--gold-light);">63.900 €</div>
+          <div style="font-size:12px;color:#4a4440;margin-top:4px;">Sin contar servicios adicionales</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="label" style="margin-bottom:20px;">Incluido en el precio</span>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#a89f90;"><span style="color:var(--gold);min-width:16px;">✓</span>Alojamiento + ropa de cama y toallas</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#a89f90;"><span style="color:var(--gold);min-width:16px;">✓</span>Baño privado con agua caliente + amenities</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#a89f90;"><span style="color:var(--gold);min-width:16px;">✓</span>Cocina equipada · Electricidad · Climatización</div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#a89f90;"><span style="color:var(--gold);min-width:16px;">✓</span>Terraza privada + parking + limpieza final</div>
+        </div>
+
+        <span class="label" style="margin-bottom:16px;font-size:10px;">Extras que aumentan el ticket</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="font-size:13px;color:#6a6258;">🍳 Desayuno · 10–15 €/persona</div>
+          <div style="font-size:13px;color:#6a6258;">🛁 Jacuzzi privado · 30–50 €</div>
+          <div style="font-size:13px;color:#6a6258;">🔥 Barbacoa · 10–20 €</div>
+          <div style="font-size:13px;color:#6a6258;">🐾 Mascotas · 10–15 €/noche</div>
+          <div style="font-size:13px;color:#6a6258;">🔭 Observación estelar guiada</div>
+          <div style="font-size:13px;color:#6a6258;">🚴 Rutas y experiencias locales</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 9: CRONOGRAMA ══════ -->
+<section class="slide" style="background:var(--bg);">
+  <div class="z px py">
+    <div class="g2" style="gap:70px;">
+      <div>
+        <span class="label">Plan de Ejecución</span>
+        <h2 class="headline" style="font-size:clamp(32px,4vw,50px);margin-bottom:18px;">De la idea<br><em style="font-style:italic;font-weight:300;">a la apertura</em></h2>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:28px;">Un proyecto modular como este permite una ejecución rápida y ordenada. Desde los primeros trámites hasta la primera reserva: 5–6 meses.</p>
+        <div style="background:rgba(200,150,62,0.05);border:1px solid rgba(200,150,62,0.14);padding:28px;">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Primer ingreso proyectado</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#fff;">6 meses</div>
+          <div style="font-size:12px;color:#4a4440;">Desde inicio de trámites hasta apertura</div>
+        </div>
+      </div>
+      <div>
+        <div class="tl-item">
+          <div class="tl-num">01</div><div class="tl-line"></div>
+          <div class="tl-c"><div class="tl-phase">Fase 1</div><div class="tl-title">Licencias y Permisos</div><p class="tl-desc">Declaración responsable turística CLM, licencia urbanística, proyecto técnico firmado y alta en el Registro de Empresas Turísticas.</p><div class="tl-time">Mes 1 – Mes 2</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-num">02</div><div class="tl-line"></div>
+          <div class="tl-c"><div class="tl-phase">Fase 2</div><div class="tl-title">Preparación del Terreno</div><p class="tl-desc">Soleras de hormigón H-25, fosa séptica 3.000 L, tomas de agua desde pozo y canalización eléctrica enterrada.</p><div class="tl-time">Mes 3</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-num">03</div><div class="tl-line"></div>
+          <div class="tl-c"><div class="tl-phase">Fase 3</div><div class="tl-title">Montaje de los TipiTop</div><p class="tl-desc">Instalación de las 3 unidades. Estructura, cerramientos, instalaciones interiores y terraza de madera.</p><div class="tl-time">Mes 4 – Mes 5</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-num">04</div><div class="tl-line" style="background:rgba(200,150,62,0.08);"></div>
+          <div class="tl-c"><div class="tl-phase">Fase 4</div><div class="tl-title">Acabados y Apertura</div><p class="tl-desc">Interiorismo, fotografía profesional, alta en Airbnb/Booking/web propia y lanzamiento en redes sociales.</p><div class="tl-time">Mes 6</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 10: GALERÍA ENTORNO ══════ -->
+<section class="slide" style="background:#030a03;">
+  <div class="z px" style="padding-top:clamp(50px,6vh,80px);">
+    <div style="text-align:center;margin-bottom:36px;">
+      <span class="label">La Finca · Las Cuatro Estaciones</span>
+      <h2 class="headline" style="font-size:clamp(32px,4vw,50px);">Torrebuceit es <em style="font-style:italic;font-weight:300;">bello todo el año</em></h2>
+    </div>
+
+    <!-- Fila 1 -->
+    <div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:4px;margin-bottom:4px;">
+      <div style="position:relative;overflow:hidden;height:clamp(240px,30vw,400px);">
+        <img src="13.jpg" alt="Campos de girasoles en verano" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gal-caption"><div class="gal-season">Verano</div><div class="gal-title">Mar de girasoles · Torrebuceit</div></div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:clamp(240px,30vw,400px);">
+        <img src="castillo-nevado.jpg" alt="Fortaleza árabe y acueducto nevados" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gal-caption"><div class="gal-season">Invierno</div><div class="gal-title">Fortaleza y acueducto bajo la nieve</div></div>
+      </div>
+    </div>
+
+    <!-- Fila 2 -->
+    <div style="display:grid;grid-template-columns:0.5fr 0.8fr 0.7fr;gap:4px;margin-bottom:4px;">
+      <div style="position:relative;overflow:hidden;height:clamp(200px,24vw,340px);">
+        <img src="16.jpg" alt="Atardecer sobre los campos verdes" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gal-caption"><div class="gal-season">Primavera</div><div class="gal-title">Atardecer sobre el cereal</div></div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:clamp(200px,24vw,340px);">
+        <img src="dron_finca.jpg" alt="Paisaje de la finca" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gal-caption"><div class="gal-season">La Finca</div><div class="gal-title">Paisaje agrícola · Torrebuceit</div></div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:clamp(200px,24vw,340px);">
+        <img src="20.jpg" alt="Vista de la finca Torrebuceit" style="width:100%;height:100%;object-fit:cover;">
+        <div class="gal-caption"><div class="gal-season">La Finca</div><div class="gal-title">Entorno natural · Torrebuceit</div></div>
+      </div>
+    </div>
+
+    <div style="padding-bottom:clamp(50px,6vh,80px);"></div>
+  </div>
+</section>
+
+<!-- ══════ SLIDE 11: NOCHE ESTRELLADA ══════ -->
+<section class="slide-full">
+  <div class="bg" style="background-image:url('19.png');background-position:center top;"></div>
+  <div class="ov-left"></div>
+
+  <div class="z px py" style="max-width:600px;">
+    <span class="label">Experiencia Exclusiva</span>
+    <h2 class="headline" style="font-size:clamp(38px,5.5vw,70px);margin-bottom:18px;">La Vía Láctea<br><em style="font-style:italic;font-weight:300;">a tu alcance</em></h2>
+    <div class="divider"></div>
+    <p class="body-text" style="margin-bottom:26px;">Cero contaminación lumínica. Los cielos de Torrebuceit permiten ver la Vía Láctea a simple vista durante más de 200 noches al año. Una experiencia que los viajeros urbanos pagan como experiencia premium.</p>
+    <p class="body-text" style="margin-bottom:36px;">Finca en Calma tiene capacidad para solicitar la <strong style="color:#e8e0d0;font-weight:400;">Certificación Starlight</strong> — el sello internacional de turismo astronómico que diferencia un destino a nivel global.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;">
+      <div style="border:1px solid rgba(200,150,62,0.22);padding:18px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);line-height:1;">200+</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Noches despejadas/año</div>
+      </div>
+      <div style="border:1px solid rgba(200,150,62,0.22);padding:18px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);line-height:1;">0</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4a4440;margin-top:5px;">Contaminación lumínica</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip"><span>Finca en Calma</span><span>Certificación Starlight · Turismo Astronómico</span></div>
+</section>
+
+<!-- ══════ SLIDE 12: ACUEDUCTO REAL ══════ -->
+<section class="slide-full">
+  <div class="bg" style="background-image:url('Gemini_Generated_Image_4qdc7n4qdc7n4qdc.png');background-position:center 30%;"></div>
+  <div class="ov-center"></div>
+
+  <div class="z px py center">
+    <span class="label">El Entorno</span>
+    <h2 class="headline" style="font-size:clamp(38px,6vw,78px);max-width:780px;margin:0 auto 18px;">
+      Donde cada<br><em style="font-style:italic;font-weight:300;">amanecer</em><br>es un privilegio
+    </h2>
+    <div class="divider divider-c"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2vw,22px);color:#c8bfaa;max-width:560px;margin:0 auto;font-weight:300;line-height:1.5;">
+      "El acueducto romano al atardecer, con la luz dorada de Castilla —<br>eso no se compra. Eso se hereda."
+    </p>
+  </div>
+
+  <div class="strip"><span>Finca en Calma</span><span>Acueducto Romano · Torrebuceit · Cuenca</span></div>
+</section>
+
+<!-- ══════ SLIDE 13: CONTACTO ══════ -->
+<section class="slide-full" style="background:#020803;">
+  <div class="z px py center">
+    <span class="label">Contacto e Inversión</span>
+    <h2 class="headline" style="font-size:clamp(34px,5vw,62px);margin-bottom:14px;">
+      Hagamos realidad<br><em style="font-style:italic;font-weight:300;">la calma</em>
+    </h2>
+    <div class="divider divider-c"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,2vw,22px);color:#c8bfaa;max-width:480px;margin:0 auto 46px;font-weight:300;">
+      Un modelo turístico respetuoso, eficiente y altamente rentable en un enclave único de Castilla-La Mancha.
+    </p>
+
+    <div class="cbox">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#fff;margin-bottom:5px;">Francisco Rodríguez Arnuero</div>
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,150,62,0.55);margin-bottom:8px;">Promotor del Proyecto · Finca en Calma</div>
+      <div class="cgrid">
+        <div><div class="clabel">Email</div><div class="cval">frarnuero@gmail.com</div></div>
+        <div><div class="clabel">Móvil</div><div class="cval">649 807 482</div></div>
+        <div style="grid-column:span 2;"><div class="clabel">Ubicación</div><div class="cval">Finca Torrebuceit · Cuenca · Castilla-La Mancha · España</div></div>
+      </div>
+    </div>
+
+    <p style="margin-top:46px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,150,62,0.2);">
+      Finca en Calma — Donde el silencio se disfruta
+    </p>
+  </div>
+</section>
+
+</body>
+</html>
