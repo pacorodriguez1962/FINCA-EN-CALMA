@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finca en Calma — Glamping · Torrebuceit · Cuenca</title>
+<meta name="description" content="Glamping de lujo en Torrebuceit, Cuenca. Alojamiento premium en plena naturaleza junto a un acueducto romano del siglo I y una fortaleza árabe del siglo XII.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & ROOT ── */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C8963E;
+  --gold-light:#E8B86D;
+  --gold-dim:rgba(200,150,62,0.15);
+  --forest:#0D1B0F;
+  --ink:#060e05;
+  --cream:#FDF6E3;
+  --stone:#8B7355;
+  --text:#e8e0d0;
+  --muted:#a89f90;
+  --dim:#6a6258;
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--ink);
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CURSOR ── */
+.cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(200,150,62,0.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:22px clamp(24px,6vw,80px);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.4s ease, padding 0.4s ease;
+}
+nav.scrolled{
+  background:rgba(6,14,5,0.96);
+  backdrop-filter:blur(12px);
+  padding:14px clamp(24px,6vw,80px);
+  border-bottom:1px solid rgba(200,150,62,0.1);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;
+  color:#fff;letter-spacing:1px;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--gold);font-style:italic;font-weight:300;}
+.nav-links{display:flex;gap:36px;align-items:center;}
+.nav-links a{
+  font-size:11px;font-weight:500;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,0.6);
+  text-decoration:none;transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{
+  background:var(--gold);color:var(--forest)!important;
+  padding:10px 24px;font-weight:600!important;
+  transition:background 0.3s!important;
+}
+.nav-cta:hover{background:var(--gold-light)!important;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.nav-burger span{width:24px;height:1px;background:var(--gold);display:block;transition:all 0.3s;}
+
+/* ── HERO ── */
+#hero{
+  height:100vh;position:relative;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('Gemini_Generated_Image_4qdc7n4qdc7n4qdc.png');
+  background-size:cover;background-position:center;
+  transform:scale(1.05);
+  animation:heroZoom 12s ease-out forwards;
+}
+@keyframes heroZoom{from{transform:scale(1.05);}to{transform:scale(1);}}
+.hero-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,14,5,0.3) 0%,rgba(6,14,5,0.15) 40%,rgba(6,14,5,0.9) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 clamp(24px,8vw,120px) clamp(60px,8vh,100px);
+  width:100%;
+}
+.hero-tag{
+  display:inline-block;
+  border:1px solid rgba(200,150,62,0.4);
+  padding:6px 18px;margin-bottom:24px;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold-light);
+  animation:fadeUp 1s 0.3s both;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(60px,9vw,120px);
+  font-weight:300;line-height:0.92;color:#fff;
+  letter-spacing:-2px;margin-bottom:20px;
+  animation:fadeUp 1s 0.5s both;
+}
+.hero-title strong{font-weight:700;color:var(--gold);}
+.hero-title em{font-style:italic;font-weight:300;}
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(16px,2.2vw,24px);
+  font-style:italic;color:#c8bfaa;font-weight:300;
+  margin-bottom:36px;
+  animation:fadeUp 1s 0.7s both;
+}
+.hero-actions{
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  animation:fadeUp 1s 0.9s both;
+}
+.btn-primary{
+  background:var(--gold);color:var(--forest);
+  padding:16px 36px;font-size:12px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;
+  display:inline-block;
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-ghost{
+  border:1px solid rgba(255,255,255,0.3);color:#fff;
+  padding:16px 36px;font-size:12px;font-weight:400;
+  letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;
+  display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* scroll indicator */
+.hero-scroll{
+  position:absolute;bottom:36px;right:clamp(24px,6vw,80px);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fadeUp 1s 1.2s both;
+}
+.hero-scroll span{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,150,62,0.5);writing-mode:vertical-rl;}
+.hero-scroll-line{width:1px;height:50px;background:linear-gradient(var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite;}
+@keyframes scrollLine{0%,100%{opacity:0.3;transform:scaleY(1);}50%{opacity:1;transform:scaleY(0.5);}}
+
+/* heritage strip */
+.heritage{
+  background:var(--gold);
+  padding:14px clamp(24px,6vw,80px);
+  display:flex;align-items:center;justify-content:center;
+  gap:32px;flex-wrap:wrap;
+}
+.heritage span{
+  font-size:10px;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--forest);
+}
+.heritage-dot{width:3px;height:3px;background:var(--forest);border-radius:50%;opacity:0.4;}
+
+/* ── SECTIONS COMMON ── */
+section{padding:clamp(70px,10vh,120px) clamp(24px,8vw,120px);}
+.section-label{
+  font-size:10px;font-weight:500;letter-spacing:5px;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:16px;display:block;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,62px);
+  font-weight:600;line-height:1.05;color:#fff;
+  margin-bottom:16px;
+}
+.section-title em{font-style:italic;font-weight:300;color:var(--muted);}
+.divider{width:50px;height:1px;background:var(--gold);margin:20px 0;}
+.divider-c{margin:20px auto;}
+.body-text{font-size:15px;color:var(--muted);line-height:1.8;font-weight:300;}
+
+/* ── EXPERIENCIA ── */
+#experiencia{background:#060e05;}
+.exp-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.exp-img-stack{position:relative;height:600px;}
+.exp-img-main{
+  position:absolute;top:0;left:0;right:80px;bottom:80px;
+  overflow:hidden;
+}
+.exp-img-main img{width:100%;height:100%;object-fit:cover;}
+.exp-img-secondary{
+  position:absolute;bottom:0;right:0;width:55%;height:55%;
+  overflow:hidden;
+  border:4px solid var(--ink);
+}
+.exp-img-secondary img{width:100%;height:100%;object-fit:cover;}
+.exp-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px;}
+.exp-stat{background:rgba(200,150,62,0.06);border:1px solid rgba(200,150,62,0.1);padding:24px 20px;}
+.exp-stat-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--gold);line-height:1;}
+.exp-stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:6px;}
+
+/* ── HISTORIA ── */
+#historia{background:#040a04;position:relative;overflow:hidden;}
+.historia-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.historia-img{position:relative;overflow:hidden;min-height:560px;}
+.historia-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.historia-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,#040a04 100%);}
+.historia-content{padding:clamp(50px,7vh,90px) clamp(36px,5vw,70px);display:flex;flex-direction:column;justify-content:center;}
+.historia-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;}
+.hcard{background:rgba(200,150,62,0.04);border-left:2px solid var(--gold);padding:24px 20px;}
+.hcard-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#e8e0d0;margin-bottom:8px;}
+
+/* ── ALOJAMIENTO ── */
+#alojamiento{background:#060e05;}
+.aloj-header{text-align:center;max-width:700px;margin:0 auto 60px;}
+.aloj-big{
+  width:100%;height:clamp(300px,45vw,560px);
+  overflow:hidden;margin-bottom:4px;position:relative;
+}
+.aloj-big img{width:100%;height:100%;object-fit:cover;object-position:center 60%;}
+.aloj-big-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 50%,rgba(6,14,5,0.8) 100%);
+}
+.aloj-big-caption{
+  position:absolute;bottom:32px;left:40px;right:40px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.aloj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:50px;}
+.aloj-thumb{overflow:hidden;height:200px;position:relative;}
+.aloj-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.aloj-thumb:hover img{transform:scale(1.06);}
+.aloj-thumb-label{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 14px;
+  background:linear-gradient(transparent,rgba(6,14,5,0.85));
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+}
+.aloj-specs{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(200,150,62,0.07);}
+.spec{background:#060e05;padding:28px 20px;text-align:center;}
+.spec-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold);line-height:1;}
+.spec-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:6px;}
+
+/* ── GALERÍA ── */
+#galeria{padding:0;background:#030803;}
+.gal-grid{display:grid;grid-template-columns:1.4fr 0.6fr 1fr;grid-template-rows:400px 360px;gap:4px;}
+.gal-item{overflow:hidden;position:relative;}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;}
+.gal-item:hover img{transform:scale(1.04);}
+.gal-item.tall{grid-row:span 2;}
+.gal-caption{position:absolute;bottom:0;left:0;right:0;padding:20px 22px;background:linear-gradient(transparent,rgba(3,8,3,0.85));}
+.gal-season{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.gal-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:400;}
+
+/* ── TARIFAS ── */
+#tarifas{background:#060e05;}
+.tarifas-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.tarifa-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 26px;border-left:2px solid transparent;
+  transition:all 0.3s;
+}
+.tarifa-row:hover{background:rgba(200,150,62,0.05);border-left-color:var(--gold);}
+.tarifa-season{font-size:14px;color:var(--muted);}
+.tarifa-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:#e8e0d0;}
+.tarifa-price.featured{color:var(--gold-light);}
+.includes-list{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+.includes-item{display:flex;gap:14px;align-items:flex-start;font-size:14px;color:var(--muted);}
+.includes-item span.check{color:var(--gold);min-width:16px;margin-top:2px;}
+.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
+.extra{font-size:13px;color:var(--dim);}
+.total-box{
+  background:rgba(200,150,62,0.05);
+  border:1px solid rgba(200,150,62,0.15);
+  padding:30px;margin-top:32px;
+}
+
+/* ── CONTACTO ── */
+#contacto{
+  background:#030803;position:relative;overflow:hidden;
+  text-align:center;
+}
+#contacto::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('castillo.png');
+  background-size:cover;background-position:center;
+  opacity:0.12;
+}
+.contact-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;}
+.contact-box{
+  border:1px solid rgba(200,150,62,0.2);
+  padding:50px 60px;margin-top:50px;position:relative;
+}
+.contact-box::before,.contact-box::after{
+  content:'';position:absolute;
+  width:20px;height:20px;
+  border-color:var(--gold);border-style:solid;
+}
+.contact-box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
+.contact-box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
+.contact-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#fff;margin-bottom:6px;}
+.contact-role{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,150,62,0.5);margin-bottom:32px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;text-align:left;}
+.contact-item .clabel{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.contact-item .cval{font-size:15px;color:#c8bfaa;}
+.contact-item a{color:#c8bfaa;text-decoration:none;}
+.contact-item a:hover{color:var(--gold);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--forest);
+  padding:24px clamp(24px,6vw,80px);
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(200,150,62,0.08);flex-wrap:wrap;gap:12px;
+}
+footer p{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,150,62,0.25);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.25s;}
+.reveal-delay-3{transition-delay:0.4s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .exp-layout,.historia-layout,.tarifas-layout{grid-template-columns:1fr;}
+  .historia-img{min-height:380px;}
+  .historia-img::after{background:linear-gradient(180deg,transparent 60%,#040a04 100%);}
+  .exp-img-stack{height:380px;}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .gal-item.tall{grid-row:span 1;}
+  .contact-grid{grid-template-columns:1fr 1fr;}
+  .aloj-specs{grid-template-columns:repeat(3,1fr);}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+}
+@media(max-width:600px){
+  .aloj-grid{grid-template-columns:1fr 1fr;}
+  .historia-cards{grid-template-columns:1fr;}
+  .exp-stats{grid-template-columns:1fr 1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .aloj-specs{grid-template-columns:1fr 1fr;}
+  .gal-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══════ NAV ══════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Finca <span>en Calma</span></a>
+  <div class="nav-links">
+    <a href="#experiencia">La Experiencia</a>
+    <a href="#historia">Historia</a>
+    <a href="#alojamiento">Alojamiento</a>
+    <a href="#tarifas">Tarifas</a>
+    <a href="#contacto" class="nav-cta">Reservar</a>
+  </div>
+  <div class="nav-burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Torrebuceit · Cuenca · Castilla-La Mancha</div>
+    <h1 class="hero-title">
+      FINCA<br><strong>en</strong> <em>Calma</em>
+    </h1>
+    <p class="hero-sub">Donde el silencio se disfruta</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Reservar ahora</a>
+      <a href="#experiencia" class="btn-ghost">Descubrir</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- HERITAGE BAND -->
+<div class="heritage">
+  <span>Acueducto Romano · s. I d.C.</span>
+  <div class="heritage-dot"></div>
+  <span>Fortaleza Árabe · s. XII</span>
+  <div class="heritage-dot"></div>
+  <span>Glamping Premium · Cuenca</span>
+  <div class="heritage-dot"></div>
+  <span>Patrimonio Familiar</span>
+</div>
+
+<!-- ══════ EXPERIENCIA ══════ -->
+<section id="experiencia">
+  <div class="exp-layout">
+    <div class="exp-img-stack reveal">
+      <div class="exp-img-main">
+        <img src="castillo-nevado.jpg" alt="Fortaleza y acueducto nevados">
+      </div>
+      <div class="exp-img-secondary">
+        <img src="13.jpg" alt="Mar de girasoles en verano">
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <span class="section-label">La Experiencia</span>
+      <h2 class="section-title">El lujo<br>de <em>no hacer nada</em></h2>
+      <div class="divider"></div>
+      <p class="body-text" style="margin-bottom:20px;">
+        A menos de dos horas de Madrid y Valencia, Finca en Calma es el antídoto perfecto al ruido de la ciudad. Aquí el tiempo se mide por la posición del sol, el croar de las ranas y el viento entre los olivos.
+      </p>
+      <p class="body-text">
+        Duerme bajo la Vía Láctea. Desayuna con el acueducto romano al fondo. Pasea entre los mismos olivos que vieron pasar al rey Ceyt-Abu-Ceyt hace ocho siglos. Eso no se compra — se hereda. Y ahora se comparte.
+      </p>
+      <div class="exp-stats reveal reveal-delay-2">
+        <div class="exp-stat">
+          <div class="exp-stat-num">1h45</div>
+          <div class="exp-stat-label">Desde Madrid</div>
+        </div>
+        <div class="exp-stat">
+          <div class="exp-stat-num">200+</div>
+          <div class="exp-stat-label">Noches estrelladas/año</div>
+        </div>
+        <div class="exp-stat">
+          <div class="exp-stat-num">s.I</div>
+          <div class="exp-stat-label">Acueducto romano</div>
+        </div>
+        <div class="exp-stat">
+          <div class="exp-stat-num">0</div>
+          <div class="exp-stat-label">Contaminación lumínica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ HISTORIA ══════ -->
+<section id="historia" style="padding:0;">
+  <div class="historia-layout">
+    <div class="historia-img">
+      <img src="acueducto_romano.jpg" alt="Acueducto romano de Torrebuceit">
+    </div>
+    <div class="historia-content reveal">
+      <span class="section-label">Patrimonio Único</span>
+      <h2 class="section-title">Dos milenios<br>de <em>historia viva</em></h2>
+      <div class="divider"></div>
+      <p class="body-text" style="margin-bottom:20px;">
+        La finca Torrebuceit alberga en su interior dos monumentos que la hacen única en el mundo: un <strong style="color:#e8e0d0;font-weight:400;">acueducto romano del siglo I d.C.</strong> y la <strong style="color:#e8e0d0;font-weight:400;">fortaleza árabe del siglo XII</strong> del rey moro Ceyt-Abu-Ceyt, quien se convertiría al cristianismo bajo el reinado de Jaime I de Aragón.
+      </p>
+      <p class="body-text">
+        Ambos monumentos son propiedad familiar, lo que convierte cada estancia en una experiencia de acceso exclusivo a un patrimonio histórico que no está en ningún catálogo turístico convencional.
+      </p>
+      <div class="historia-cards">
+        <div class="hcard">
+          <div class="hcard-title">Acueducto Romano</div>
+          <p class="body-text" style="font-size:13px;">Siglo I d.C. Perfectamente conservado. Icono visual de la finca.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-title">Fortaleza Árabe</div>
+          <p class="body-text" style="font-size:13px;">Siglo XII. Historia viva de la Reconquista española.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ALOJAMIENTO ══════ -->
+<section id="alojamiento">
+  <div class="aloj-header reveal">
+    <span class="section-label">El Alojamiento</span>
+    <h2 class="section-title">TipiTop — <em>confort en estado puro</em></h2>
+    <div class="divider divider-c"></div>
+    <p class="body-text">Estructura de pino laminado, lona técnica impermeable, cocina totalmente equipada, baño privado con ducha de agua caliente y dormitorio en altillo. Una experiencia de hotel boutique en plena naturaleza de Cuenca.</p>
+  </div>
+
+  <!-- Foto grande -->
+  <div class="aloj-big reveal">
+    <img src="tipi_exterior.jpg" alt="Exterior TipiTop Finca en Calma">
+    <div class="aloj-big-overlay"></div>
+    <div class="aloj-big-caption">
+      <div>
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">TipiTop Medium</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;font-weight:300;">Glamping de Alta Gama</div>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold-light);font-weight:300;line-height:1;">desde<br><strong style="font-size:52px;">130€</strong><span style="font-size:18px;">/noche</span></div>
+    </div>
+  </div>
+
+  <!-- Grid 4 interiores -->
+  <div class="aloj-grid reveal">
+    <div class="aloj-thumb">
+      <img src="COCINA.jpg" alt="Salón y zona de estar">
+      <div class="aloj-thumb-label">Salón · Zona de estar</div>
+    </div>
+    <div class="aloj-thumb">
+      <img src="9.jpg" alt="Cocina equipada">
+      <div class="aloj-thumb-label">Cocina equipada</div>
+    </div>
+    <div class="aloj-thumb">
+      <img src="14.jpg" alt="Dormitorio altillo">
+      <div class="aloj-thumb-label">Dormitorio altillo</div>
+    </div>
+    <div class="aloj-thumb">
+      <img src="WC.jpg" alt="Baño privado">
+      <div class="aloj-thumb-label">Baño privado</div>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="aloj-specs reveal">
+    <div class="spec"><div class="spec-num">4×8<span style="font-size:16px;">m</span></div><div class="spec-label">Dimensiones</div></div>
+    <div class="spec"><div class="spec-num">4<span style="font-size:16px;">pax</span></div><div class="spec-label">Capacidad máx.</div></div>
+    <div class="spec"><div class="spec-num">10<span style="font-size:16px;">m²</span></div><div class="spec-label">Terraza privada</div></div>
+    <div class="spec"><div class="spec-num">A/C</div><div class="spec-label">Climatización</div></div>
+    <div class="spec"><div class="spec-num">WiFi</div><div class="spec-label">Conectividad</div></div>
+  </div>
+</section>
+
+<!-- ══════ GALERÍA ══════ -->
+<section id="galeria">
+  <div class="gal-grid">
+    <div class="gal-item tall">
+      <img src="dron_finca.jpg" alt="Vista aérea de la fortaleza">
+      <div class="gal-caption">
+        <div class="gal-season">Vista aérea</div>
+        <div class="gal-title">Fortaleza de Torrebuceit</div>
+      </div>
+    </div>
+    <div class="gal-item">
+      <img src="16.jpg" alt="Atardecer sobre los campos">
+      <div class="gal-caption">
+        <div class="gal-season">Primavera</div>
+        <div class="gal-title">Atardecer sobre el cereal</div>
+      </div>
+    </div>
+    <div class="gal-item">
+      <img src="19.png" alt="Noche estrellada">
+      <div class="gal-caption">
+        <div class="gal-season">Noche</div>
+        <div class="gal-title">La Vía Láctea desde la terraza</div>
+      </div>
+    </div>
+    <div class="gal-item">
+      <img src="13.jpg" alt="Campos de girasoles">
+      <div class="gal-caption">
+        <div class="gal-season">Verano</div>
+        <div class="gal-title">Mar de girasoles</div>
+      </div>
+    </div>
+    <div class="gal-item">
+      <img src="castillo-nevado.jpg" alt="Fortaleza nevada">
+      <div class="gal-caption">
+        <div class="gal-season">Invierno</div>
+        <div class="gal-title">Fortaleza y acueducto bajo la nieve</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TARIFAS ══════ -->
+<section id="tarifas">
+  <div class="tarifas-layout">
+    <div class="reveal">
+      <span class="section-label">Tarifas</span>
+      <h2 class="section-title">Precios por <em>temporada</em></h2>
+      <div class="divider"></div>
+
+      <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:24px;">
+        <div class="tarifa-row" style="border-left:2px solid rgba(200,150,62,0.15);background:rgba(200,150,62,0.03);">
+          <span class="tarifa-season">Temporada baja</span>
+          <span class="tarifa-price">80–110 €</span>
+        </div>
+        <div class="tarifa-row" style="border-left:2px solid rgba(200,150,62,0.3);background:rgba(200,150,62,0.05);">
+          <span class="tarifa-season">Temporada media</span>
+          <span class="tarifa-price">110–140 €</span>
+        </div>
+        <div class="tarifa-row" style="border-left:2px solid rgba(200,150,62,0.6);background:rgba(200,150,62,0.08);">
+          <span class="tarifa-season">Temporada alta</span>
+          <span class="tarifa-price">140–180 €</span>
+        </div>
+        <div class="tarifa-row" style="border-left:2px solid var(--gold);background:rgba(200,150,62,0.12);">
+          <span class="tarifa-season" style="color:#c8bfaa;">Fines de semana especiales</span>
+          <span class="tarifa-price featured">160–220 €</span>
+        </div>
+      </div>
+
+      <div class="total-box">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Estancia mínima</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;font-weight:300;">2 noches</div>
+        <div style="font-size:12px;color:var(--dim);margin-top:4px;">Fines de semana y festivos</div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <span class="section-label" style="margin-bottom:20px;">Incluido en el precio</span>
+      <div class="includes-list" style="margin-bottom:36px;">
+        <div class="includes-item"><span class="check">✓</span>Alojamiento completo + ropa de cama y toallas</div>
+        <div class="includes-item"><span class="check">✓</span>Baño privado con agua caliente + amenities</div>
+        <div class="includes-item"><span class="check">✓</span>Cocina totalmente equipada · Electricidad · A/C</div>
+        <div class="includes-item"><span class="check">✓</span>Terraza privada + aparcamiento gratuito</div>
+        <div class="includes-item"><span class="check">✓</span>Limpieza al final de la estancia</div>
+        <div class="includes-item"><span class="check">✓</span>Acceso a los monumentos de la finca</div>
+      </div>
+
+      <span class="section-label" style="margin-bottom:16px;">Extras disponibles</span>
+      <div class="extras-grid">
+        <div class="extra">🍳 Desayuno · 10–15 €/persona</div>
+        <div class="extra">🛁 Jacuzzi privado · 30–50 €</div>
+        <div class="extra">🔥 Barbacoa · 10–20 €</div>
+        <div class="extra">🐾 Mascotas · 10–15 €/noche</div>
+        <div class="extra">🔭 Observación estelar guiada</div>
+        <div class="extra">🚴 Rutas y experiencias locales</div>
+      </div>
+
+      <a href="#contacto" class="btn-primary" style="margin-top:36px;display:inline-block;">Consultar disponibilidad</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CONTACTO ══════ -->
+<section id="contacto">
+  <div class="contact-inner reveal">
+    <span class="section-label">Reservas y Contacto</span>
+    <h2 class="section-title">¿Hablamos?</h2>
+    <div class="divider divider-c"></div>
+    <p class="body-text" style="max-width:500px;margin:0 auto;">Estaremos encantados de contarte todo sobre la finca, los monumentos y cómo llegar. Contacta directamente y te respondemos en menos de 24 horas.</p>
+
+    <div class="contact-box">
+      <div class="contact-name">Francisco Rodríguez Arnuero</div>
+      <div class="contact-role">Propietario · Finca en Calma · Torrebuceit</div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="clabel">Teléfono</div>
+          <div class="cval"><a href="tel:+34649807482">649 807 482</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="clabel">Email</div>
+          <div class="cval"><a href="mailto:frarnuero@gmail.com">frarnuero@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="clabel">Ubicación</div>
+          <div class="cval">Torrebuceit · Cuenca · Castilla-La Mancha</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,150,62,0.2);">
+      Finca en Calma — Donde el silencio se disfruta
+    </p>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <p>© 2025 Finca en Calma · Torrebuceit · Cuenca</p>
+  <p>Alojamiento sostenible · Bienestar · Naturaleza</p>
+</footer>
+
+<!-- ══════ JS ══════ -->
+<script>
+// Cursor personalizado
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '14px'; cursor.style.height = '14px';
+    ring.style.width = '50px'; ring.style.height = '50px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '8px'; cursor.style.height = '8px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.12});
+reveals.forEach(el => observer.observe(el));
+
+// Mobile menu
+document.getElementById('burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  if(links.style.display === 'flex') {
+    links.style.display = '';
+  } else {
+    links.style.display = 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'fixed';
+    links.style.top = '70px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(6,14,5,0.98)';
+    links.style.padding = '30px';
+    links.style.gap = '24px';
+    links.style.borderBottom = '1px solid rgba(200,150,62,0.1)';
+  }
+});
+</script>
+</body>
+</html>
